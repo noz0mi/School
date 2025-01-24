@@ -1,19 +1,11 @@
 package org.example;
 
-public class Command {
-    private String name;
+public final class Command {
 
-    public Command() {};
+    private Command() {}
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String parsing (String commandName) {
+    public static String parsing (String commandName) {
         switch (commandName) {
             case "-a" :
                 System.out.println("command a");
