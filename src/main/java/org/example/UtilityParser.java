@@ -10,6 +10,7 @@ public final class UtilityParser {
     public static ArrayList<Data> parsingFiles(String line) {
         String[] parsedLine = line.split(" ");
         ArrayList<Data> collectedData = new ArrayList<>();
+        //boolean noFile = false;
         for (String s:parsedLine) {
             if (s.contains(".txt")) {
                 String path = new File("").getAbsolutePath() + '\\' + s;

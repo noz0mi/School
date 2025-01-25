@@ -32,7 +32,7 @@ public class FileHelper {
             data.setRawArray(innerData);
             return data;
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage() + "Имя файла набрано неверно или такого файла не существует.");
         }
         return null;
     }
