@@ -30,7 +30,6 @@ public class FileHelper {
             }
             bufferedReader.close();
             data.setRawArray(innerData);
-            System.out.println("File has been read");
             return data;
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -56,10 +55,10 @@ public class FileHelper {
             newFolders += "\\" + folders[i];
         }
         String oldPath = new File("").getAbsolutePath();
-        String newPath = oldPath + newFolders + '\\';
+        String newPath = oldPath + newFolders + "\\";
         generalPath = newPath;
-        Path pathForInt = Paths.get(newPath);
-        if (Files.notExists(pathForInt)) {
+        Path pathForOut = Paths.get(newPath);
+        if (Files.notExists(pathForOut)) {
             new File(newPath).mkdirs();
         }
     }
@@ -70,12 +69,6 @@ public class FileHelper {
             System.out.println("Нет целочисленного типа");
         }
         else {
-            if (shortStat) {
-                System.out.println("Количество элементов в integers файле - " + processedIntList.size());
-            }
-            if (fullStat) {
-                fullStatForInt(processedIntList);
-            }
             try (FileWriter fileWriter = new FileWriter(generalPath + intTitle, append);
                  BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
                 for (int i = 0; i < processedIntList.size(); i++) {
@@ -87,6 +80,16 @@ public class FileHelper {
             catch (IOException ex) {
                 System.out.println(ex.getMessage());
             }
+            if (append) {
+                Data allData = FileHelper.collectFromFile(generalPath + intTitle);
+                processedIntList = allData.getRawArray();
+            }
+            if (shortStat) {
+                System.out.println("Количество элементов в integers файле - " + processedIntList.size());
+            }
+            if (fullStat) {
+                fullStatForInt(processedIntList);
+            }
         }
 
         List<String> processedFloatList = UtilityParser.floatFinder(collectedData);
@@ -94,12 +97,6 @@ public class FileHelper {
             System.out.println("Нет вещественного типа");
         }
         else {
-            if (shortStat) {
-                System.out.println("Количество элементов в floats файле - " + processedFloatList.size());
-            }
-            if (fullStat) {
-                fullStatForFloat(processedFloatList);
-            }
             try (FileWriter fileWriter = new FileWriter(generalPath + fltTitle, append);
                  BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
                 for (int i = 0; i < processedFloatList.size(); i++) {
@@ -111,19 +108,23 @@ public class FileHelper {
             catch (IOException ex) {
                 System.out.println(ex.getMessage());
             }
+            if (append) {
+                Data allData = FileHelper.collectFromFile(generalPath + fltTitle);
+                processedFloatList = allData.getRawArray();
+            }
+            if (shortStat) {
+                System.out.println("Количество элементов в floats файле - " + processedFloatList.size());
+            }
+            if (fullStat) {
+                fullStatForFloat(processedFloatList);
+            }
         }
 
         List<String> processedStringList = UtilityParser.stringFinder(collectedData);
         if (processedStringList.isEmpty()) {
-            System.out.println("Нет вещественного типа");
+            System.out.println("Нет строкового типа");
         }
         else {
-            if (shortStat) {
-                System.out.println("Количество элементов в strings файле - " + processedStringList.size());
-            }
-            if (fullStat) {
-                fullStatForString(processedStringList);
-            }
             try (FileWriter fileWriter = new FileWriter(generalPath + strTitle, append);
                  BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
                 for (int i = 0; i < processedStringList.size(); i++) {
@@ -134,6 +135,16 @@ public class FileHelper {
             }
             catch (IOException ex) {
                 System.out.println(ex.getMessage());
+            }
+            if (append) {
+                Data allData = FileHelper.collectFromFile(generalPath + strTitle);
+                processedStringList = allData.getRawArray();
+            }
+            if (shortStat) {
+                System.out.println("Количество элементов в strings файле - " + processedStringList.size());
+            }
+            if (fullStat) {
+                fullStatForString(processedStringList);
             }
         }
     }
