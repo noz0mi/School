@@ -18,6 +18,8 @@ public class FileHelper {
     public static boolean shortStat = false;
     public static boolean fullStat = false;
 
+    private FileHelper(){}
+
 
     public static Data collectFromFile(String name) {
         try (FileReader fileReader = new FileReader(name);
