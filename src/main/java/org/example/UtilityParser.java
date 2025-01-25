@@ -19,7 +19,7 @@ public final class UtilityParser {
         return collectedData;
     }
 
-    public static ArrayList<String> parsingCommands(String line) {
+    public static void parsingCommands(String line) {
         String[] parsedLine = line.split(" ");
         ArrayList<String> flags = new ArrayList<>();
         for(int i = 0; i < parsedLine.length; i++) {
@@ -49,7 +49,6 @@ public final class UtilityParser {
 
             }
         }
-        return flags;
     }
 
     public static List<String> integerFinder (ArrayList<Data> collectedData) {
